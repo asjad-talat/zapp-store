@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZAPP STORE — Luxury Timepieces</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            light: '#f3e5ab',
+                            DEFAULT: '#d4af37',
+                            dark: '#aa7c11',
+                        },
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#121212',
+                            700: '#1a1a1a',
+                            600: '#262626'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #d4af37 50%, #aa7c11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-button {
+            background: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+            transition: all 0.3s ease;
+        }
+        .gold-button:hover {
+            background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 20s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-200 font-sans min-h-screen flex flex-col antialiased selection:bg-gold selection:text-black">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-black text-gold text-xs tracking-widest uppercase py-2 text-center border-b border-gold/20 font-serif">
+        ★ Complimentary Worldwide & Pakistan Express Delivery ★
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-40 bg-dark-900/90 backdrop-blur-md border-b border-gold/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Store Logo & Title Integration -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="logo.png" alt="ZAPP STORE Logo" class="h-10 sm:h-12 w-auto object-contain rounded-full border border-gold/30 p-0.5 group-hover:scale-105 transition duration-300">
+                <span class="font-serif text-2xl sm:text-3xl font-bold tracking-widest text-gold gold-gradient-text">
+                    ZAPP STORE
+                </span>
+            </a>
+
+            <div class="flex items-center gap-4">
+                <!-- User Sign-In/Out Button -->
+                <div id="auth-container">
+                    <button id="user-signin-btn" onclick="window.handleGoogleSignIn()" class="text-xs border border-gold/40 text-gold px-3.5 py-1.5 rounded hover:bg-gold hover:text-black transition flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24"><path fill="currentColor" d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.761H12.545z"/></svg>
+                        <span>Sign In</span>
+                    </button>
+                </div>
+
+                <!-- Cart Trigger -->
+                <button onclick="window.toggleCart(true)" class="relative p-2 text-gray-300 hover:text-gold transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                    </svg>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-gold text-black font-bold rounded-full w-5 h-5 text-xs flex items-center justify-center">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Moving Marquee Banner -->
+    <div class="bg-dark-800 border-y border-gold/10 overflow-hidden py-3 text-xs tracking-widest text-gold/80 font-serif uppercase whitespace-nowrap">
+        <div class="animate-marquee">
+            <span class="mr-8">ZAPP STORE • LUXURY TIMEPIECES • EXCLUSIVE COLLECTION • PRECISION & STYLE •</span>
+            <span class="mr-8">ZAPP STORE • LUXURY TIMEPIECES • EXCLUSIVE COLLECTION • PRECISION & STYLE •</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative py-16 px-4 bg-gradient-to-b from-dark-900 via-dark-800 to-dark-900 text-center">
+        <h1 class="font-serif text-4xl sm:text-6xl font-extrabold tracking-widest gold-gradient-text mb-4">
+            TIMELESS ELEGANCE
+        </h1>
+        <p class="text-gray-400 max-w-2xl mx-auto text-sm sm:text-base font-light tracking-wide">
+            Explore our handcrafted luxury watches designed for precision, style, and status.
+        </p>
+    </section>
+
+    <!-- Collection Display -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow w-full">
+        <h2 class="font-serif text-center text-2xl sm:text-3xl font-semibold tracking-widest text-gold mb-12 uppercase border-b border-gold/20 pb-4 max-w-xs mx-auto">
+            ZEVYON COLLECTION
+        </h2>
+
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="col-span-full text-center py-12 text-gray-500">
+                Loading luxury timepieces...
+            </div>
+        </div>
+    </main>
+
+    <!-- Product Details Modal (Shopify Style Layout) -->
+    <div id="product-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-800 border border-gold/30 rounded-2xl max-w-4xl w-full max-h-[92vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl">
+            <button onclick="window.closeProductModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl font-bold">&times;</button>
+            <div id="modal-content" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start"></div>
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-dark-800 border-l border-gold/20 z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <div class="p-6 border-b border-gold/10 flex justify-between items-center">
+            <h3 class="font-serif text-xl font-bold text-gold">Your Shopping Cart</h3>
+            <button onclick="window.toggleCart(false)" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+        </div>
+
+        <div id="cart-items" class="p-6 flex-grow overflow-y-auto space-y-4"></div>
+
+        <div class="p-6 border-t border-gold/10 bg-dark-900 space-y-4">
+            <div class="flex justify-between text-lg font-semibold">
+                <span>Total Amount:</span>
+                <span id="cart-total" class="text-gold">PKR 0</span>
+            </div>
+            <button onclick="window.openCheckoutModal()" class="w-full py-3 gold-button text-black font-bold uppercase tracking-wider rounded-lg">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-dark-800 border border-gold/30 rounded-xl max-w-lg w-full p-6 my-8">
+            <div class="flex justify-between items-center border-b border-gold/10 pb-4 mb-4">
+                <h3 class="font-serif text-xl font-bold text-gold">Order Checkout</h3>
+                <button onclick="window.closeCheckoutModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <form id="checkout-form" onsubmit="window.handleOrderSubmission(event)" class="space-y-4 text-sm">
+                <div>
+                    <label class="block text-gray-400 mb-1">Contact Details</label>
+                    <input type="text" id="cust-phone" required placeholder="Phone Number (e.g. 03001234567)" class="w-full bg-dark-900 border border-gold/20 rounded p-2.5 text-white focus:border-gold outline-none">
+                    <input type="email" id="cust-email" required placeholder="Email Address" class="w-full bg-dark-900 border border-gold/20 rounded p-2.5 text-white focus:border-gold outline-none mt-2">
+                    <label class="flex items-center gap-2 mt-2 text-xs text-gray-400">
+                        <input type="checkbox" class="accent-gold" checked> Email me with news and offers
+                    </label>
+                </div>
+
+                <div class="pt-2">
+                    <label class="block text-gray-400 mb-1">Delivery Address</label>
+                    <input type="text" id="cust-name" required placeholder="Full Name" class="w-full bg-dark-900 border border-gold/20 rounded p-2.5 text-white focus:border-gold outline-none mb-2">
+                    <input type="text" id="cust-address" required placeholder="Street Address / House No." class="w-full bg-dark-900 border border-gold/20 rounded p-2.5 text-white focus:border-gold outline-none mb-2">
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="cust-city" required placeholder="City" class="bg-dark-900 border border-gold/20 rounded p-2.5 text-white focus:border-gold outline-none">
+                        <input type="text" value="Pakistan" disabled class="bg-dark-700 border border-gold/10 rounded p-2.5 text-gray-400 cursor-not-allowed">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-400 mb-1">Shipping Method</label>
+                    <div class="bg-dark-900 border border-gold/30 rounded p-3 flex justify-between items-center text-gold font-medium">
+                        <span>Standard Delivery</span>
+                        <span class="text-xs bg-gold/10 px-2 py-1 rounded">FREE</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 gold-button text-black font-bold uppercase tracking-wider rounded-lg mt-4">
+                    Complete Order (COD)
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hidden Admin Panel Modal -->
+    <div id="admin-modal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-dark-800 border border-gold/40 rounded-xl max-w-2xl w-full p-6 my-8 space-y-6">
+            <div class="flex justify-between items-center border-b border-gold/20 pb-4">
+                <h3 class="font-serif text-xl font-bold text-gold">ZAPP Admin Portal</h3>
+                <button onclick="document.getElementById('admin-modal').classList.add('hidden')" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <!-- Add Product Form -->
+            <form onsubmit="window.saveProduct(event)" class="space-y-4">
+                <h4 class="text-sm font-semibold text-gray-300 uppercase tracking-wider">Add New Product</h4>
+                <input type="text" id="admin-title" placeholder="Watch Title (e.g. Maturri Skeleton)" required class="w-full bg-dark-900 border border-gold/20 rounded p-2.5 text-white outline-none focus:border-gold">
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="number" id="admin-price" placeholder="Sale Price (e.g. 3999)" required class="w-full bg-dark-900 border border-gold/20 rounded p-2.5 text-white outline-none focus:border-gold">
+                    <input type="number" id="admin-original-price" placeholder="Original Price (e.g. 8000)" class="w-full bg-dark-900 border border-gold/20 rounded p-2.5 text-white outline-none focus:border-gold">
+                </div>
+                <textarea id="admin-desc" placeholder="Product Details & Features" rows="3" class="w-full bg-dark-900 border border-gold/20 rounded p-2.5 text-white outline-none focus:border-gold"></textarea>
+                <input type="text" id="admin-img" placeholder="Direct Image URL (e.g. https://...)" required class="w-full bg-dark-900 border border-gold/20 rounded p-2.5 text-white outline-none focus:border-gold">
+                <input type="text" id="admin-video" placeholder="Video URL (Optional MP4 Link)" class="w-full bg-dark-900 border border-gold/20 rounded p-2.5 text-white outline-none focus:border-gold">
+                <input type="text" id="admin-whatsapp" placeholder="WhatsApp Number (e.g. 923001234567)" class="w-full bg-dark-900 border border-gold/20 rounded p-2.5 text-white outline-none focus:border-gold">
+                <button type="submit" class="w-full py-3 gold-button text-black font-bold uppercase rounded-lg">Save Product to Firebase</button>
+            </form>
+
+            <hr class="border-gold/10">
+
+            <!-- View Orders -->
+            <div>
+                <h4 class="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-2">Customer Orders</h4>
+                <div id="admin-orders" class="space-y-3 max-h-60 overflow-y-auto text-xs">
+                    <p class="text-gray-500">Loading orders...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gold/10 py-8 text-center text-xs text-gray-500">
+        <p class="font-serif text-gray-400 mb-2">ZAPP STORE — Luxury Defined</p>
+        <p id="admin-trigger" class="cursor-pointer select-none hover:text-gold" ondblclick="window.openAdminModal()">
+            © 2026 ZAPP STORE. All Rights Reserved. (Double click for Admin)
+        </p>
+    </footer>
+
+    <!-- Firebase Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC4_HhVS1zRqE3KSdx4wGTRi_a489CKFHk",
+            authDomain: "zapp-store-8d9ac.firebaseapp.com",
+            projectId: "zapp-store-8d9ac",
+            storageBucket: "zapp-store-8d9ac.firebasestorage.app",
+            messagingSenderId: "427127783478",
+            appId: "1:427127783478:web:0e1a0285d09fcf0686d897",
+            measurementId: "G-PN1Y4351HF"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        let currentUser = null;
+        let cart = [];
+        let fetchedProducts = [];
+        let currentModalQty = 1;
+
+        // Auth Listener
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            const container = document.getElementById('auth-container');
+            if (user) {
+                container.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-gold">Hi, ${user.displayName ? user.displayName.split(' ')[0] : 'User'}</span>
+                        <button onclick="window.handleSignOut()" class="text-[10px] border border-red-500/40 text-red-400 px-2 py-1 rounded hover:bg-red-500 hover:text-white transition">Logout</button>
+                    </div>
+                `;
+                document.getElementById('cust-email').value = user.email || '';
+                document.getElementById('cust-name').value = user.displayName || '';
+            } else {
+                container.innerHTML = `
+                    <button id="user-signin-btn" onclick="window.handleGoogleSignIn()" class="text-xs border border-gold/40 text-gold px-3.5 py-1.5 rounded hover:bg-gold hover:text-black transition flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24"><path fill="currentColor" d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.761H12.545z"/></svg>
+                        <span>Sign In</span>
+                    </button>
+                `;
+            }
+        });
+
+        window.handleGoogleSignIn = async function() {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                return result.user;
+            } catch (err) {
+                console.error("Sign in error:", err);
+                alert("Login failed or cancelled. Please try again.");
+                return null;
+            }
+        };
+
+        window.handleSignOut = async function() {
+            await signOut(auth);
+            alert("Signed out successfully!");
+        };
+
+        async function loadProducts() {
+            const grid = document.getElementById('products-grid');
+            try {
+                const querySnapshot = await getDocs(collection(db, "products"));
+                fetchedProducts = [];
+                querySnapshot.forEach((doc) => {
+                    fetchedProducts.push({ id: doc.id, ...doc.data() });
+                });
+
+                if (fetchedProducts.length === 0) {
+                    grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500">No products available yet. Add products via Admin Panel.</div>`;
+                    return;
+                }
+
+                grid.innerHTML = fetchedProducts.map(p => {
+                    const price = Number(p.price || 0);
+                    const origPrice = Number(p.originalPrice || 0);
+                    return `
+                        <div class="bg-dark-800 border border-gold/20 rounded-2xl p-5 text-center group hover:border-gold transition duration-300">
+                            <div class="relative w-44 h-44 mx-auto mb-4 rounded-full overflow-hidden bg-black border border-gold/30 p-2 group-hover:scale-105 transition duration-300">
+                                <img src="${p.images?.[0] || 'https://via.placeholder.com/300'}" alt="${p.title}" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <h3 class="font-serif font-semibold text-base text-white mb-1 truncate">${p.title}</h3>
+                            <div class="flex justify-center items-center gap-2 mb-4">
+                                <span class="text-gold font-bold">Rs. ${price.toLocaleString()}</span>
+                                ${origPrice > price ? `<span class="text-xs text-gray-500 line-through">Rs. ${origPrice.toLocaleString()}</span>` : ''}
+                            </div>
+                            <div class="flex gap-2 justify-center">
+                                <button onclick="window.viewProduct('${p.id}')" class="px-3 py-1.5 text-xs border border-gold text-gold hover:bg-gold hover:text-black rounded transition">Details</button>
+                                <button onclick="window.addToCart('${p.id}', 1)" class="px-3 py-1.5 text-xs gold-button text-black font-semibold rounded">Add to Cart</button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } catch (err) {
+                console.error("Error fetching products: ", err);
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-red-400">Error loading products. Ensure Firestore rules allow read.</div>`;
+            }
+        }
+
+        window.viewProduct = function(id) {
+            const p = fetchedProducts.find(item => item.id === id);
+            if (!p) return;
+            currentModalQty = 1;
+            const price = Number(p.price || 0);
+            const origPrice = Number(p.originalPrice || 0);
+            const savings = origPrice > price ? (origPrice - price) : 0;
+            const waNumber = p.whatsapp || "923001234567";
+
+            const content = document.getElementById('modal-content');
+            content.innerHTML = `
+                <div>
+                    <img src="${p.images?.[0] || 'https://via.placeholder.com/300'}" class="w-full rounded-2xl border border-gold/20 mb-3 object-cover shadow-lg">
+                    ${p.videoUrl ? `<video src="${p.videoUrl}" controls class="w-full rounded-2xl border border-gold/20"></video>` : ''}
+                </div>
+                <div class="flex flex-col space-y-4">
+                    <h2 class="font-serif text-3xl font-extrabold text-white tracking-wide">${p.title}</h2>
+                    
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl font-bold text-red-500">Rs.${price.toLocaleString()}.00</span>
+                        ${origPrice > price ? `<span class="text-sm text-gray-400 line-through">Rs.${origPrice.toLocaleString()}.00</span>` : ''}
+                        ${savings > 0 ? `<span class="bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-md uppercase">SAVING Rs.${savings.toLocaleString()}.00</span>` : ''}
+                    </div>
+
+                    <div class="inline-flex items-center gap-2 border border-gold/30 px-3 py-1.5 rounded-lg text-xs text-gold/90 w-fit">
+                        <span>👁</span> <span>${Math.floor(Math.random() * 8) + 5} people are viewing this</span>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1.5">Quantity</label>
+                        <div class="flex items-center border border-gray-600 rounded-lg w-28 bg-dark-900">
+                            <button onclick="window.changeQty(-1)" class="w-8 py-1.5 text-gray-300 hover:text-white font-bold text-base">-</button>
+                            <span id="qty-val" class="flex-1 text-center text-sm text-white font-semibold">1</span>
+                            <button onclick="window.changeQty(1)" class="w-8 py-1.5 text-gray-300 hover:text-white font-bold text-base">+</button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2.5 pt-2">
+                        <button onclick="window.addToCart('${p.id}', currentModalQty); window.closeProductModal();" class="w-full py-3.5 bg-black hover:bg-gray-900 text-white font-bold rounded-xl border border-gold/40 transition">
+                            Add to cart
+                        </button>
+                        <button onclick="window.buyNow('${p.id}')" class="w-full py-3.5 bg-black hover:bg-gray-900 text-gold font-bold rounded-xl border border-gold transition">
+                            Buy it now
+                        </button>
+                        <a href="https://wa.me/${waNumber}?text=Hi%2C%20I%20want%20to%20order%20${encodeURIComponent(p.title)}" target="_blank" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition">
+                            <span>WhatsApp Order</span>
+                        </a>
+                    </div>
+
+                    <p class="text-gray-400 text-xs leading-relaxed border-t border-gold/10 pt-3">${p.description || 'Premium quality luxury timepiece.'}</p>
+                </div>
+            `;
+            document.getElementById('product-modal').classList.remove('hidden');
+        };
+
+        window.changeQty = function(delta) {
+            currentModalQty = Math.max(1, currentModalQty + delta);
+            document.getElementById('qty-val').innerText = currentModalQty;
+        };
+
+        window.addToCart = async function(id, qty = 1) {
+            if (!currentUser) {
+                alert("Please Sign In first to add items to your cart!");
+                const user = await window.handleGoogleSignIn();
+                if (!user) return;
+            }
+
+            const p = fetchedProducts.find(item => item.id === id);
+            if (!p) return;
+            
+            for (let i = 0; i < qty; i++) {
+                cart.push(p);
+            }
+            updateCartUI();
+            window.toggleCart(true);
+        };
+
+        window.buyNow = async function(id) {
+            if (!currentUser) {
+                alert("Please Sign In first to proceed to buy!");
+                const user = await window.handleGoogleSignIn();
+                if (!user) return;
+            }
+            const p = fetchedProducts.find(item => item.id === id);
+            if (!p) return;
+            cart.push(p);
+            updateCartUI();
+            window.closeProductModal();
+            window.openCheckoutModal();
+        };
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const itemsContainer = document.getElementById('cart-items');
+            itemsContainer.innerHTML = cart.map((item, idx) => `
+                <div class="flex justify-between items-center bg-dark-900 p-3 rounded-lg border border-gold/10">
+                    <div>
+                        <h4 class="text-sm font-semibold text-white">${item.title}</h4>
+                        <p class="text-xs text-gold">PKR ${Number(item.price || 0).toLocaleString()}</p>
+                    </div>
+                    <button onclick="window.removeFromCart(${idx})" class="text-red-400 text-xs">Remove</button>
+                </div>
+            `).join('');
+            const total = cart.reduce((sum, i) => sum + (Number(i.price) || 0), 0);
+            document.getElementById('cart-total').innerText = `PKR ${total.toLocaleString()}`;
+        }
+
+        window.removeFromCart = function(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        };
+
+        window.openCheckoutModal = async function() {
+            if (!currentUser) {
+                alert("Please Sign In first to proceed to checkout!");
+                const user = await window.handleGoogleSignIn();
+                if (!user) return;
+            }
+
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        };
+
+        window.handleOrderSubmission = async function(e) {
+            e.preventDefault();
+            if (!currentUser) {
+                alert("Please Sign In to complete your order!");
+                return;
+            }
+
+            const orderData = {
+                userUid: currentUser.uid,
+                customer: {
+                    phone: document.getElementById('cust-phone').value,
+                    email: document.getElementById('cust-email').value,
+                    name: document.getElementById('cust-name').value,
+                    address: document.getElementById('cust-address').value,
+                    city: document.getElementById('cust-city').value,
+                    country: "Pakistan"
+                },
+                items: cart,
+                totalAmount: cart.reduce((sum, i) => sum + (Number(i.price) || 0), 0),
+                status: "Pending",
+                createdAt: serverTimestamp()
+            };
+
+            try {
+                await addDoc(collection(db, "orders"), orderData);
+                alert("Order placed successfully! We will contact you soon.");
+                cart = [];
+                updateCartUI();
+                window.closeCheckoutModal();
+                window.toggleCart(false);
+            } catch (err) {
+                alert("Failed to submit order: " + err.message);
+            }
+        };
+
+        // Admin Portal
+        window.openAdminModal = function() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+            loadAdminOrders();
+        };
+
+        window.saveProduct = async function(e) {
+            e.preventDefault();
+            const p = {
+                title: document.getElementById('admin-title').value,
+                price: Number(document.getElementById('admin-price').value),
+                originalPrice: Number(document.getElementById('admin-original-price').value || 0),
+                description: document.getElementById('admin-desc').value,
+                images: [document.getElementById('admin-img').value],
+                videoUrl: document.getElementById('admin-video').value || "",
+                whatsapp: document.getElementById('admin-whatsapp').value || "923001234567",
+                createdAt: serverTimestamp()
+            };
+
+            try {
+                await addDoc(collection(db, "products"), p);
+                alert("Product saved successfully to Firebase!");
+                e.target.reset();
+                loadProducts();
+            } catch (err) {
+                alert("Error saving product: " + err.message);
+            }
+        };
+
+        async function loadAdminOrders() {
+            const container = document.getElementById('admin-orders');
+            try {
+                const snapshot = await getDocs(collection(db, "orders"));
+                if (snapshot.empty) {
+                    container.innerHTML = `<p class="text-gray-500">No orders received yet.</p>`;
+                    return;
+                }
+                container.innerHTML = snapshot.docs.map(doc => {
+                    const o = doc.data();
+                    return `
+                        <div class="bg-dark-900 p-3 rounded border border-gold/20 space-y-1">
+                            <div class="flex justify-between text-gold font-bold">
+                                <span>Order ID: ${doc.id}</span>
+                                <span>PKR ${Number(o.totalAmount || 0).toLocaleString()}</span>
+                            </div>
+                            <p class="text-gray-300"><strong>Name:</strong> ${o.customer?.name} | <strong>Phone:</strong> ${o.customer?.phone}</p>
+                            <p class="text-gray-400"><strong>Address:</strong> ${o.customer?.address}, ${o.customer?.city}</p>
+                        </div>
+                    `;
+                }).join('');
+            } catch (err) {
+                container.innerHTML = `<p class="text-red-400">Failed to load orders.</p>`;
+            }
+        }
+
+        window.toggleCart = function(open) {
+            const drawer = document.getElementById('cart-drawer');
+            if (open) drawer.classList.remove('translate-x-full');
+            else drawer.classList.add('translate-x-full');
+        };
+
+        window.closeProductModal = () => document.getElementById('product-modal').classList.add('hidden');
+        window.closeCheckoutModal = () => document.getElementById('checkout-modal').classList.add('hidden');
+
+        window.addEventListener('DOMContentLoaded', loadProducts);
+    </script>
+</body>
+</html>
